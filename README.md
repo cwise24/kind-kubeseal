@@ -300,6 +300,11 @@ Pod view, from here you can see pod distribution, health. Hover over the pods to
 - add files to folder, gh actions to kubeseal
 
 
+in git repo, cd->.git/hooks
+ cat pre-push.sample 
+
+Create kubeseal pre push
+
 # Metal LB
 
 ```
