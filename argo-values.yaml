@@ -1,0 +1,25 @@
+# change resource exclusions 
+server:
+  service:
+    type: NodePort
+    # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
+    nodePortHttp: 30080
+configs:
+  cm:
+    resource.exclusions: |
+        - apiGroups:
+          - ''
+          - discovery.k8s.io
+          kinds:
+          - Endpoints
+          - EndpointSlice
+        - apiGroups:
+          - authentication.k8s.io
+          - authorization.k8s.io
+          kinds:
+          - SelfSubjectReview
+          - TokenReview
+          - LocalSubjectAccessReview
+          - SelfSubjectAccessReview
+          - SelfSubjectRulesReview
+          - SubjectAccessReview
