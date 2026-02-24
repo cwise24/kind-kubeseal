@@ -247,11 +247,13 @@ Running 'kubectl get secret secret-name -o [json|yaml]' will show the decrypted 
 Both the SealedSecret and generated Secret must have the same name and namespace.
 ```
 
+
+
 ## to remove
 
 # Application
 
-Add application, for this we will use the *envoy* directroy in argocd-repo. The envoy-gateway application will deploy envoy and the gateway api crds for use.
+Add application, for this we will use the *sealedsec-app.yaml*. This step is **ONLY** used if you want Argo to deploy sealed secrets and you did **NOT** install already via helm.
  
 
 ![add-application](imgs/application_add.png)
