@@ -275,9 +275,9 @@ kubeseal --cert pub.pem --format yaml < secret.yaml > sealed-secret.yaml
 > [!NOTE] 
 > If you choose this route, please make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
 
-**2.** WE can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
+**2.** W can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
 
-You will take the file *pre-commit-ks.sh* and copy it to the .git/hooks folder. 
+You will take the file *pre-commit-ks.sh* and copy it to your local repository .git/hooks folder. 
 
 ```
 cp pre-commit-ks.sh .git/hooks/pre-commit
