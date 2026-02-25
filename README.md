@@ -179,7 +179,7 @@ Also, take time to scroll and view all the options when setting up the repositor
 You should now see the above screen.
 
 
-# kubeseal and sealed secrets
+# Helm install of sealed secrets
 
 [repo](https://github.com/bitnami-labs/sealed-secrets)
 
@@ -248,10 +248,7 @@ Both the SealedSecret and generated Secret must have the same name and namespace
 ```
 
 
-
-## to remove
-
-# Application
+# ArgoCD Application Install
 
 Add application, for this we will use the *sealedsec-app.yaml*. This step is **ONLY** used if you want Argo to deploy sealed secrets and you did **NOT** install already via helm.
  
