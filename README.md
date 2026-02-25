@@ -287,58 +287,81 @@ Pod view, from here you can see pod distribution, health. Hover over the pods to
 
 ## Lab
 
+With *sealed-secrets* installed, we can now test how to use it.
 
-1. add basic lab with secret.yaml and kubseal command to encrypt with controller public key
-
-2. Create folder where files are checked in and kubseal runs 
-
-- get controller public key `kubectl --fetch-cert > pub.pem`
-- reference pub.pem
-- add files to folder, gh actions to kubeseal
-
-
-in git repo, cd->.git/hooks
- cat pre-push.sample 
-
-Create kubeseal pre push
-
-# Metal LB
+In the repository, you have a file called *secret.yaml*. This is a basic secret file that we will use to test the functionality. You will need to first obtain the public key from the sealed secrets controller.
 
 ```
-docker inspect kind | jq .[].Status.IPAM.Subnets
+kubectl --fetch-cert > pub.pem
 ```
+From this point, we have a couple of options.
 
-Collect the node ip address range provided by the KinD CNI in your Docker network. We will use avaiable IP space from this subnet to use for IPAM for MetalLB
-
-Make necessary edits to the metallb-conf.yaml file under the **IPAddressPool** section. You'll notice two files, IPAddrress Pool and advertisement (L2/L3).
-
+1. You can encrypt the secret file with the public key.
 
 ```
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
+kubeseal --cert pub.pem --format yaml < secret.yaml > sealed-secret.yaml
+```
+
+If you choose this route, pleae make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
+
+2. WE can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
+
+You will take the file *pre-commit-ks.sh* and copy it to the .git/hooks folder. 
+
+```
+cp pre-commit-ks.sh .git/hooks/pre-commit
+```
+
+ Please verify the permissions are set correctly.
+
+```
+chmod +x .git/hooks/pre-commit
+```
+
+Now, you can copy the secret file to the folder maked **kubeseal**. 
+
+```
+cp secret.yaml kubeseal/.
+```
+
+Let's pause here to understand what is happening. In Git, the pre-commit hook is a script that runs before a commit is made. In this case, we are using it to run the kubeseal command to encrypt the secret file. The script will run the kubeseal command and output the encrypted file (with appended -sealed to the name) to the same folder. There are many *git hooks* available, you can find them [here](https://git-scm.com/docs/githooks).
+
+
+Notice your new *pre-commit* hook below:
+
+```
+applypatch-msg.sample		    pre-applypatch.sample		  pre-push.sample			      push-to-checkout.sample
+commit-msg.sample		        pre-commit			          pre-rebase.sample		      sendemail-validate.sample
+fsmonitor-watchman.sample	  pre-commit.sample		      pre-receive.sample		    update.sample
+post-update.sample		      pre-merge-commit.sample		prepare-commit-msg.sample
+```
+
+For this, I choose option 2. 
+
+Create appliction file to utilize the sealed secret..
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: ext-pool
-  namespace: metal
+  name: sealed-secrets
+  namespace: argocd
 spec:
-  addresses:
-  - 172.19.255.1-172.19.255.20
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: ext-advertisement
-  namespace: metal
+  project: default
+  source:
+    repoURL: https://github.com/cwise24/kind-argo-repo.git
+    targetRevision: HEAD
+    path: kubeseal
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
 ```
-
-Now deploy the metal lb manifest:
-
-```
-kubetcl apply -f metallb-conf.yaml
-```
-
-Deploy metallb applcation *metallb-app.yaml* from ArgoCD
-
 
 # Clean Up
 
