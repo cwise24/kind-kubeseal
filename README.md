@@ -28,7 +28,7 @@ By default, *kind* comes with it's own cni called *kindnetd*. This has been disa
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
 ```
 
-**You'll need to run this as we've set a cusoter cidr block**:
+**You'll need to run this as we've set a custom cidr block**:
 
 ```
 kubectl apply -f calico-custom-resource.yaml
@@ -272,7 +272,7 @@ From this point, we have a couple of options.
 kubeseal --cert pub.pem --format yaml < secret.yaml > sealed-secret.yaml
 ```
 
-If you choose this route, pleae make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
+If you choose this route, please make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
 
 2. WE can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
 
@@ -288,7 +288,7 @@ cp pre-commit-ks.sh .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 ```
 
-Now, you can copy the secret file to the folder maked **kubeseal**. 
+Now, you can copy the secret file to the folder marked **kubeseal**. 
 
 ```
 cp secret.yaml kubeseal/.
@@ -308,7 +308,7 @@ post-update.sample		      pre-merge-commit.sample		prepare-commit-msg.sample
 
 For this, I choose option 2. 
 
-Create appliction file to utilize the sealed secret..
+Create application file to utilize the sealed secret..
 
 ```
 apiVersion: argoproj.io/v1alpha1
