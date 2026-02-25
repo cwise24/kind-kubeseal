@@ -266,15 +266,16 @@ kubectl --fetch-cert > pub.pem
 ```
 From this point, we have a couple of options.
 
-1. You can encrypt the secret file with the public key.
+**1.** You can encrypt the secret file with the public key.
 
 ```
 kubeseal --cert pub.pem --format yaml < secret.yaml > sealed-secret.yaml
 ```
 
-If you choose this route, please make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
+> [!NOTE] 
+> If you choose this route, please make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
 
-2. WE can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
+**2.** WE can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
 
 You will take the file *pre-commit-ks.sh* and copy it to the .git/hooks folder. 
 
