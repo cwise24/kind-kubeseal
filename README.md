@@ -45,7 +45,8 @@ watch kubectl get pods -l k8s-app=calico-node -A
 
 # ArgoCD
 
-Install ArgoCD 
+<details> 
+<summary>Install ArgoCD</summary>
 
 
 Add **argo** repo:
@@ -111,6 +112,8 @@ Password: from above
 ![argo-login](imgs/argocd_login.png)
 
 We will do changes from argocd cli 
+
+</details>
 
 # Git
 
