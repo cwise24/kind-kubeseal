@@ -330,7 +330,10 @@ post-update.sample		      pre-merge-commit.sample		prepare-commit-msg.sample
 
 For this, I choose option 2. 
 
-Create application file to utilize the sealed secret..
+Create application file to utilize the sealed secret. 
+
+> [!NOTE]
+> **You will need to update the repoURL to your own repository**
 
 ```
 apiVersion: argoproj.io/v1alpha1
