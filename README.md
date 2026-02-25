@@ -341,7 +341,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/cwise24/kind-argo-repo.git
+    repoURL: git@github.com:cwise24/kind-kubeseal.git
     targetRevision: HEAD
     path: kubeseal
   destination:
