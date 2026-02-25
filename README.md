@@ -294,6 +294,27 @@ Now, you can copy the secret file to the folder marked **kubeseal**.
 ```
 cp secret.yaml kubeseal/.
 ```
+Now it's just a *normal* GitOps flow.
+
+Add your file
+
+```
+git add kubeseal/secret-sealed.yaml
+```
+
+Commit your file
+
+```
+git commit -m "Add sealed secret"
+```
+
+Push your file
+
+```
+git push
+```
+
+Now you can view you file in the local and remote repository to see it's encrypted.
 
 Let's pause here to understand what is happening. In Git, the pre-commit hook is a script that runs before a commit is made. In this case, we are using it to run the kubeseal command to encrypt the secret file. The script will run the kubeseal command and output the encrypted file (with appended -sealed to the name) to the same folder. There are many *git hooks* available, you can find them [here](https://git-scm.com/docs/githooks).
 
