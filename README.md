@@ -117,6 +117,9 @@ We will do changes from argocd cli
 
 # Git
 
+<details>
+<summary> Set Up Git </summary>
+
 Create lab ssh deploy keys
 
 ```
@@ -181,6 +184,7 @@ Also, take time to scroll and view all the options when setting up the repositor
 
 You should now see the above screen.
 
+</details>
 
 # Helm install of sealed secrets
 
@@ -250,43 +254,6 @@ Running 'kubectl get secret secret-name -o [json|yaml]' will show the decrypted 
 Both the SealedSecret and generated Secret must have the same name and namespace.
 ```
 
-
-# ArgoCD Application Install
-
-Add application, for this we will use the *sealedsec-app.yaml*. This step is **ONLY** used if you want Argo to deploy sealed secrets and you did **NOT** install already via helm.
- 
-
-![add-application](imgs/application_add.png)
-
-![app-create](imgs/application_create1.png)
-
-![app-paste](imgs/application-paste.png)
-
-
-Click create to finalize the creation process
-
-![app-create-final](imgs/app-create2.png)
-
-You can view the application by clicking the tile:
-
-![view-app](imgs/app-view1.png)
-
-This is the tree view where you can see all the components deployed, check out all the options in the top right. The views are:
-
-Tree <br/>
-Pods <br/>
-Network <br/>
-List <br/>
-
-![tree-view](imgs/app-view-tree.png)
-
-Pod view, from here you can see pod distribution, health. Hover over the pods to see details.
-
-![app-pod-view](imgs/app-pod-view.png)
-
-![app-pod-health](imgs/app-pod-health.png)
-
-![app-pod-logs](imgs/app-pod-logs.png)
 
 ## Lab
 
@@ -365,7 +332,42 @@ spec:
       prune: true
       selfHeal: true
 ```
+# ArgoCD Application Install
 
+Add application, for this we will use the *sealedsec-app.yaml*. This step is **ONLY** used if you want Argo to deploy sealed secrets and you did **NOT** install already via helm.
+ 
+
+![add-application](imgs/application_add.png)
+
+![app-create](imgs/application_create1.png)
+
+![app-paste](imgs/application-paste.png)
+
+
+Click create to finalize the creation process
+
+![app-create-final](imgs/app-create2.png)
+
+You can view the application by clicking the tile:
+
+![view-app](imgs/app-view1.png)
+
+This is the tree view where you can see all the components deployed, check out all the options in the top right. The views are:
+
+Tree <br/>
+Pods <br/>
+Network <br/>
+List <br/>
+
+![tree-view](imgs/app-view-tree.png)
+
+Pod view, from here you can see pod distribution, health. Hover over the pods to see details.
+
+![app-pod-view](imgs/app-pod-view.png)
+
+![app-pod-health](imgs/app-pod-health.png)
+
+![app-pod-logs](imgs/app-pod-logs.png)
 # Clean Up
 
 ```
