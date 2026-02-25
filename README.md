@@ -334,6 +334,9 @@ spec:
 ```
 # ArgoCD Application Install
 
+<details>
+<summary> Add application </summary>
+
 Add application, for this we will use the *sealedsec-app.yaml*. This step is **ONLY** used if you want Argo to deploy sealed secrets and you did **NOT** install already via helm.
  
 
@@ -368,6 +371,9 @@ Pod view, from here you can see pod distribution, health. Hover over the pods to
 ![app-pod-health](imgs/app-pod-health.png)
 
 ![app-pod-logs](imgs/app-pod-logs.png)
+
+</details>
+
 # Clean Up
 
 ```
