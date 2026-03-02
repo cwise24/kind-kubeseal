@@ -20,7 +20,7 @@ from pathlib import Path
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 
-CERT_PATH = "sealed-secrets-cert.pem"  # path to kubeseal public cert
+CERT_PATH = "pub.pem"                   # path to kubeseal public cert
 KUBESEAL_ARGS = [                       # extend with --namespace etc. as needed
     "--format=yaml",
     f"--cert={CERT_PATH}",
@@ -36,8 +36,8 @@ def run(cmd: list[str], **kwargs) -> subprocess.CompletedProcess:
 
 def sealed_path(original: Path) -> Path:
     """
-    Given  secrets/my-secret.yaml
-    Return secrets/my-secret-sealed.yaml
+    Given  kubeseal/my-secret.yaml
+    Return kubeseal/my-secret-sealed.yaml
     """
     return original.with_stem(original.stem + "-sealed")
 
