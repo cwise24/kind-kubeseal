@@ -199,7 +199,7 @@ helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 ```
 
 ```
-helm upgrade --install sealed-secrets sealed-secrets/sealed-secrets -n kube-system
+helm upgrade --install sealed-secrets sealed-secrets/sealed-secrets -f sealedsec-values.yaml -n kube-system
 ```
 
 Output:
@@ -264,7 +264,7 @@ With *sealed-secrets* installed, we can now test how to use it.
 In the repository, you have a file called *secret.yaml*. This is a basic secret file that we will use to test the functionality. You will need to first obtain the public key from the sealed secrets controller.
 
 ```
-kubectl --fetch-cert > pub.pem
+kubeseal --fetch-cert > pub.pem
 ```
 From this point, we have a couple of options.
 
@@ -277,7 +277,7 @@ kubeseal --cert pub.pem --format yaml < secret.yaml > sealed-secret.yaml
 > [!NOTE] 
 > If you choose this route, please make sure to move the new sealed secret file to the kubeseal folder. This is where ArgoCD will look for the sealed secret file.
 
-**2.** W can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
+**2.** We can use the Git *Pre-Commit hook* magic to handle this for us. How do we do this?
 
 You will take the file *pre-commit-ks.sh* and copy it to your local repository .git/hooks folder. 
 
