@@ -1,9 +1,9 @@
-# ArgoCD
+# Kind Kubeseal
 
 Deploy KinD cluster with Calico
 
 ```
-kind create cluster --config kind-mk-config.yaml --name argocd
+kind create cluster --config kind-mk-config.yaml --name kubeseal
 ```
 
 ## View Cluster
@@ -20,6 +20,8 @@ argocd-worker2         Ready    <none>          102m   v1.35.0
 ## Install Calico
 
 By default, *kind* comes with it's own cni called *kindnetd*. This has been disabled in *kind-mk-config.yaml* and Calico will be installed.
+
+Why Calico? It's all about them **B**'s, them **G**'s, and them **P**'s.
 
 
 [KIND](https://www.tigera.io/project-calico/)
@@ -402,5 +404,5 @@ Pod view, from here you can see pod distribution, health. Hover over the pods to
 # Clean Up
 
 ```
-kind delete cluster --name argocd
+kind delete cluster --name kubeseal
 ```
