@@ -27,7 +27,7 @@ Why Calico? It's all about them **B**'s, them **G**'s, and them **P**'s.
 [KIND](https://www.tigera.io/project-calico/)
 
 ```
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.4/manifests/tigera-operator.yaml
 ```
 
 **You'll need to run this as we've set a custom cidr block**:
