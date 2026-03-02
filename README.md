@@ -315,6 +315,19 @@ Push your file
 ```
 git push
 ```
+**REVISE**
+
+Install the pre-commit Framework:
+
+```
+brew install pre-commit
+```
+
+Make sure the *.pre-commit-config.yaml* is in the root of your repository. And run:
+
+```
+pre-commit install
+```
 
 Now you can view you file in the local and remote repository to see it's encrypted.
 
