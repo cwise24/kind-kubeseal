@@ -6,9 +6,12 @@ repos:
         entry: python scripts/seal_secrets.py
         language:
           system # uses the system Python — no pip install needed
-          # (the script only uses stdlib)
-        # Only run on YAML files inside kubeseal/ that are NOT already sealed.
-        files: ^kubeseal/.*\.ya?ml$
-        exclude: ^kubeseal/.*-sealed\.ya?ml$
-        pass_filenames: true # pre-commit passes staged file paths as args
+          # (the script uses stdlib only)
+        # Match ALL yaml files anywhere inside the secrets/ folder.
+        files: ^kubeseal/
+        types: [yaml]
+        # Skip files that are already sealed — the script also enforces this as
+        # a belt-and-suspenders check.
+        exclude: .*-sealed\.ya?ml$
+        pass_filenames: true # pre-commit passes every matching staged path
         stages: [pre-commit]
