@@ -29,7 +29,7 @@ from pathlib import Path
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 
-CERT_PATH = "../pub.pem"  # path to kubeseal public cert
+CERT_PATH = "pub.pem"  # path to kubeseal public cert
 KUBESEAL_ARGS = [                       # extend with --namespace etc. as needed
     "--format=yaml",
     f"--cert={CERT_PATH}",
