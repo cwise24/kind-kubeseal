@@ -4,10 +4,11 @@ repos:
       - id: kubeseal-secrets
         name: Seal Kubernetes secrets with kubeseal
         entry: python scripts/seal_secrets.py
-        language: system          # uses the system Python — no pip install needed
-                                  # (the script only uses stdlib)
-        # Only run on YAML files inside secrets/ that are NOT already sealed.
-        files: ^secrets/.*\.ya?ml$
-        exclude: ^secrets/.*-sealed\.ya?ml$
-        pass_filenames: true      # pre-commit passes staged file paths as args
+        language:
+          system # uses the system Python — no pip install needed
+          # (the script only uses stdlib)
+        # Only run on YAML files inside kubeseal/ that are NOT already sealed.
+        files: ^kubeseal/.*\.ya?ml$
+        exclude: ^kubeseal/.*-sealed\.ya?ml$
+        pass_filenames: true # pre-commit passes staged file paths as args
         stages: [pre-commit]
