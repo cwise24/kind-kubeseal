@@ -310,7 +310,9 @@ Finally a push:
 git push
 ```
 
-Let's pause here to understand what is happening. In Git, the pre-commit hook is a script that runs before a commit is made. In this case, we are using it to run the kubeseal command to encrypt the secret file. The script will run the kubeseal command and output the encrypted file (with appended -sealed to the name) to the same folder. There are many *git hooks* available, you can find them [here](https://git-scm.com/docs/githooks).
+Let's pause here to understand what is happening. In Git, the pre-commit hook is a script that runs before a commit is made. In this case, we are using it to run the kubeseal command to encrypt the secret file. The script will run the kubeseal command and output the encrypted file (with appended -sealed to the name) to the same folder. There are many *git hooks* available, you can find them [here](https://git-scm.com/docs/githooks). 
+
+Please now verify the contents of the local folder *kubeseal* now has a new file called *secret-sealed.yaml*. 
 
 
 Notice your new *pre-commit* hook below:
@@ -327,7 +329,7 @@ For this, I choose option 2.
 Create application file to utilize the sealed secret. 
 
 > [!NOTE]
-> **You will need to update the repoURL to your own repository**
+> **You will need to update the repoURL to your repository**
 
 ```
 apiVersion: argoproj.io/v1alpha1
@@ -351,6 +353,15 @@ spec:
       prune: true
       selfHeal: true
 ```
+
+For instructions on how to add the application to ArgoCD, see the section below.
+
+Let's now verify the secret you've deployed.
+
+```
+kubectl get secret my-secret -o json | jq '.data | map_values(@base64d)'
+```
+
 # ArgoCD Application Install
 
 <details>
